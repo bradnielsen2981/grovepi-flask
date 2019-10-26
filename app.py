@@ -1,41 +1,29 @@
 from flask import *
-import brickpirobot # import the BrickPi3 helpers
-#from raspberry import RaspberryThread
 import os
 import picamera
-#import cv2
-import socket
-import io
+#import cv2 #this might need certain libraries to be installed
 
 #Global Variables
-#vc = cv2.VideoCapture(0)
-robot = brickpirobot.Robot()
-
 app = Flask(__name__)
 
 #request handlers ---------------------------
-
 @app.route('/')
 def home():
     return render_template("index.html")
 
 @app.route('/start')
 def start():
-    robot.move_power_untildistanceto(25,10)
-    #robot.move_time_power(10,25)
     return("Start")
 
 @app.route('/stop')
 def stop():
-    robot.stop_all()
     return("Stop")
 
 @app.route('/resetall')
 def resetall():
-    robot.reset_all()
     return("Reset All")
 
-
+#Needs to be in its own file
 #---------------CAMERA FUNCTIONS-------------------NEED TO INSTALL OPENCV
 '''def gen():
     """Video streaming generator function."""
@@ -53,5 +41,6 @@ def video_feed():
 '''
 #--------------------------------------------#
 
+#Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
