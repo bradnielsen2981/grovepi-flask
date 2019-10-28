@@ -1,6 +1,6 @@
 from flask import *
 import os
-import picamera
+#import picamera
 #import cv2 #this might need certain libraries to be installed
 
 #Global Variables
