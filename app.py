@@ -19,9 +19,11 @@ def start():
 def stop():
     return("Stop")
 
-@app.route('/resetall')
-def resetall():
-    return("Reset All")
+@app.route('/shutdown')
+def shoutdown():
+    func = request.environ.get('werkzeug.server.shutdown')
+    func()
+    return("Shutdown Flask Server")
 
 #Needs to be in its own file
 #---------------CAMERA FUNCTIONS-------------------NEED TO INSTALL OPENCV
