@@ -6,6 +6,16 @@ import os
 #Global Variables
 app = Flask(__name__)
 
+#for encrypting the password in the database
+def hash_password(password):
+    salt = uuid.uuid4().hex
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
+
+#for decrypting the password in the database - returns true if correct
+def check_password(hashed_password, user_password):
+    password, salt = hashed_password.split(':')
+    return password == hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()
+
 #request handlers ---------------------------
 @app.route('/')
 def home():
@@ -23,24 +33,6 @@ def stop():
 def resetall():
     return("Reset All")
 
-#Needs to be in its own file
-#---------------CAMERA FUNCTIONS-------------------NEED TO INSTALL OPENCV
-'''def gen():
-    """Video streaming generator function."""
-    while True:
-        rval, frame = vc.read()
-        cv2.imwrite('t.jpg', frame)
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('t.jpg', 'rb').read() + b'\r\n')
-
-@app.route('/video_feed')
-def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-'''
-#--------------------------------------------#
-
-#Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
+#Threaded mode is important if using shared resources e.g. sensors, each user request launches a thread.. 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True)
