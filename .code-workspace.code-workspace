@@ -6,6 +6,6 @@
 	],
 	"settings": {
 		"python.condaPath": "C:\\ProgramData\\Anaconda\\conda.exe",
-		"python.pythonPath": "c:\\ProgramData\\Anaconda3\\python.exe"
+		"python.pythonPath": "c:\\Python37\\python.exe"
 	}
 }
