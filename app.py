@@ -15,13 +15,13 @@ def home():
 #start a light
 @app.route('/start', methods=['GET','POST'])
 def start():
-    grove.turn_on_led_digitalport(5)
+    #call the grove pi led turn on code
     return jsonify({ "message":"starting" }) #jsonify take any type and makes a JSON string
 
 #stop a light
 @app.route('/stop', methods=['GET','POST'])
 def stop():
-    grove.turn_off_led_digitalport(5)
+    #call the grove pi led turn off code
     return jsonify({ "message":"stopping" }) 
 
 #---------------------------------------------------------------
