@@ -6,10 +6,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="static/script.js"></script>
 </head>
 
-<body>
+<body style="padding:30px;font-size:16px;">
     {% block content %}{% endblock %} <!--Container for Content -->
+    <footer>
+        {% for message in get_flashed_messages() %}
+        <div style="color:red;">
+            {{message}}
+        </div>
+        {%endfor%}
+    </footer>
 </body>
-<script src="static/script.js"></script>
+
 </html>

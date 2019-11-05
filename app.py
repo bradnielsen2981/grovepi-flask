@@ -1,5 +1,6 @@
-from flask import *
-import logging
+from flask import Flask, render_template, jsonify, request
+import logging #allow loggings
+import grove #imports the grove functionality that you define
 
 #Global Variables
 app = Flask(__name__)
@@ -10,19 +11,26 @@ log = logging.getLogger('app') #sets up a log -- to log call log.info('message')
 def home():
     return render_template("index.html")
 
-@app.route('/start')
+#start a light
+@app.route('/start', methods=['GET','POST'])
 def start():
-    return("Start")
+    log.info("Testing")
+    grove.turn_on_led_digitalport(5)
+    return jsonify({ "message":"starting" }) #jsonify take any type and makes a JSON string
 
-@app.route('/stop')
+#stop a light
+@app.route('/stop', methods=['GET','POST'])
 def stop():
-    return("Stop")
+    grove.turn_off_led_digitalport(5)
+    return jsonify({ "message":"stopping" }) 
 
-@app.route('/shutdown')
+#---------------------------------------------------------------
+#Shutdown the web server
+@app.route('/shutdown', methods=['GET','POST'])
 def shutdown():
     func = request.environ.get('werkzeug.server.shutdown')
     func()
-    return("Shutdown Flask Server")
+    return jsonify({ "message":"shutting down" }) #This message shouldnt go through
 
 #Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
 if __name__ == '__main__':

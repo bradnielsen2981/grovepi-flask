@@ -1,23 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
+<h2>Sample Web Interface using Bootstrap</h2><br/>
+<p>The buttons when clicked run a special script that can be used to send data to the server without a form (and the necessary page refresh). This helper script uses JSON (a method of sending complex data through text encoding).</p>
+<p>The helper function is as follows: <b>function JSONrequest</b> (urlstring, methodstring, parametersobject=null, responsehandler=defaulthandler, sendtype="json", crossdomainbool=false</p>
 <div class="container">
     <div class="row">
         <h3 id="message"></h3>
     </div>
     <div class="row">
-        <div class="col s6">
-            <button style="background-color:pink;" onclick="ajaxRequest('/start')">Start</button>
-            <button style="background-color:lightblue;" onclick="ajaxRequest('/stop') ">Stop</button>
-        </div>
+        <button type="button" class="btn btn-success" onclick="JSONrequest('/start','POST')">Turn On Light</button>
     </div>
     <div class="row">
-        <button style="background-color:red;" onclick="ajaxRequest('/shutdown')">Shutdown</button>
+        <button type="button" class="btn btn-danger" onclick="JSONrequest('/stop','POST') ">Turn Off Light</button>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <button type="button" class="btn btn-dark" onclick="JSONrequest('/shutdown','POST')">Shutdown Server</button>
     </div>
 </div>
-<h3>DEBUG</h3>
-{% for message in get_flashed_messages() %}
-<div style="color:red;">
-    {{message}}
-</div>
-{%endfor%}
 {% endblock %}

@@ -6,7 +6,7 @@ import logging
 log = logging.getLogger('app.grove')
 
 # This function will return the current light reading from the desired ANALOG port A0, A1 etc
-def read_light_sensor_from_port(port):
+def read_light_sensor_analogueport(port):
     light_sensor = port
     grovepi.pinMode(light_sensor,"INPUT")
     sensor_value = None
@@ -16,14 +16,26 @@ def read_light_sensor_from_port(port):
         log.info("Error in reading the light sensor")
     return sensor_value
 
+#Turn on the led
+def turn_on_led_digitalport(port):
+    led = port
+    grovepi.pinMode(led,"OUTPUT")
+    grovepi.digitalWrite(led,255)
+    return
+
+#Turn off the led
+def turn_off_led_digitalport(port):
+    led = port
+    grovepi.pinMode(led,"OUTPUT")
+    grovepi.digitalWrite(led,0)
+    return
+
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
+    pass
+    '''
     while True:
-        light = read_light_sensor_from_port(0)
+        light = read_light_sensor_analogueport(0)
         print(light)
-        # Connect the LED to digital port D5
-        led = 5
-        grovepi.pinMode(led,"OUTPUT")
-        grovepi.digitalWrite(led,light)
-        time.sleep(0.5)
+    '''
 
