@@ -1,8 +1,9 @@
 from flask import *
-import os
+import logging
 
 #Global Variables
 app = Flask(__name__)
+log = logging.getLogger('app') #sets up a log -- to log call log.info('message')
 
 #request handlers ---------------------------
 @app.route('/')
