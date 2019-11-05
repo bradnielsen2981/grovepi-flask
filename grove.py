@@ -13,7 +13,7 @@ def read_light_sensor_analogueport(port):
     try:
         sensor_value = grovepi.analogRead(light_sensor) # Get sensor value
     except IOError:
-        log.info("Error in reading the light sensor")
+        log.error("Error in reading the light sensor")
     return sensor_value
 
 #Turn on the led

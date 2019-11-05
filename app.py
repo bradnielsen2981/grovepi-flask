@@ -4,9 +4,10 @@ import grove #imports the grove functionality that you define
 
 #Global Variables
 app = Flask(__name__)
-log = logging.getLogger('app') #sets up a log -- to log call log.info('message')
+log = app.logger #sets up a log -- to log call log.info('message')
+#log.error("Testing") --use this to log an error
 
-#request handlers ---------------------------
+#request handlers ---------------------------------------------
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -14,7 +15,6 @@ def home():
 #start a light
 @app.route('/start', methods=['GET','POST'])
 def start():
-    log.info("Testing")
     grove.turn_on_led_digitalport(5)
     return jsonify({ "message":"starting" }) #jsonify take any type and makes a JSON string
 
@@ -30,7 +30,7 @@ def stop():
 def shutdown():
     func = request.environ.get('werkzeug.server.shutdown')
     func()
-    return jsonify({ "message":"shutting down" }) #This message shouldnt go through
+    return jsonify({ "message":"shutting down" }) 
 
 #Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
 if __name__ == '__main__':
