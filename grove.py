@@ -3,7 +3,7 @@ import grovepi
 import time
 import logging
 
-log = logging.getLogger('app.grove')
+log = logging.getLogger('app')
 
 # This function will return the current light reading from the desired ANALOG port A0, A1 etc
 def read_light_sensor_analogueport(port):
@@ -30,6 +30,9 @@ def turn_off_led_digitalport(port):
     grovepi.digitalWrite(led,0)
     return
 
+
+
+#--------------------------------------------------------------------
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
     pass

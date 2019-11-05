@@ -7,9 +7,9 @@ import logging
 
 class DatabaseHelper():
 
-    def __init__(self):
+    def __init__(self, location):
         self.location = location #location of database file
-        self.log = logging.getLogger('app.database') #pass in a function to handle errors (app.logger.error from Flask)
+        self.log = logging.getLogger('app') #pass in a function to handle errors (app.logger.error from Flask)
         return
 
     # Returns a handle to the Database
@@ -27,8 +27,8 @@ class DatabaseHelper():
             cursor = connection.execute(query, params)
             result = cursor.fetchall()  #returns a list of dictionaries
         except (sqlite3.OperationalError, sqlite3.Warning, sqlite3.Error) as e:
-            self.log.info(query) 
-            self.log.info("Database error: %s" % e)
+            self.log.error(query) 
+            self.log.error("Database error: %s" % e)
         connection.close()
         return result #should be a list of dictionaries on success, else equals None
 
@@ -40,8 +40,8 @@ class DatabaseHelper():
         try:
             result = connection.execute(query, params)
         except (sqlite3.OperationalError, sqlite3.Warning, sqlite3.Error) as e:
-            self.log.info(query) 
-            self.log.info("Database error: %s" % e)
+            self.log.error(query) 
+            self.log.error("Database error: %s" % e)
         connection.commit()
         connection.close()
         return result #Should be a true or false depending on success??

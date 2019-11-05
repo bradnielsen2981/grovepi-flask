@@ -2,7 +2,7 @@
 urlstring, methodstring="GET"or"POST", parameterobject={var1:value,var1:value}, crossdomain=true or false, responsehandler=functionname */
 function JSONrequest(urlstring, methodstring, parametersobject=null, responsehandler=defaulthandler, sendtype="json", crossdomainbool=false )
 {
-    $( document ).ready(function() {
+    $( document ).ready(function() { //make sure script is fully loaded
         $.ajax({
             type: methodstring,
             crossDomain: crossdomainbool, //THIS IS REQUIRED IF COMMUNICATING TO NON-LOCAL SERVER
