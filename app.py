@@ -2,6 +2,8 @@ from flask import Flask, render_template, jsonify, request
 import logging #allow loggings
 import grove #imports the grove functionality that you define
 
+#uses JSONIFY to encode data structures in Strings. AJAX can then change it back..
+
 #Global Variables
 app = Flask(__name__)
 log = app.logger #sets up a log -- to log call log.info('message')

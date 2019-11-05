@@ -1,5 +1,7 @@
 #----------------------------------------------------------------------------
 # This Database object provides an interface to the database and includes logging
+# I have made this an object because you could have more than one database in your system
+# It's therefore easier to simply inherit the code..
 # Created by Brad Nielsen 2019
 #----------------------------------------------------------------------------
 import sqlite3
@@ -12,7 +14,7 @@ class DatabaseHelper():
         self.log = logging.getLogger('app') #pass in a function to handle errors (app.logger.error from Flask)
         return
 
-    # Returns a handle to the Database
+    # Returns a handle to the Database 
     def connect(self):
         connection = sqlite3.connect(self.location)
         connection.row_factory = sqlite3.Row #configures database queries to return a list of dictionaries (each row/record) [{"field1":value1,"field2":value2...},{etc},{} ]
