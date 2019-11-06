@@ -22,6 +22,7 @@ def get_mac():
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
     setRGB(0,128,64)
+    setText(get_ip() + "  " + get_mac())
     elapsedtime = 0
     starttime = time.time()
     c = 1
@@ -30,13 +31,9 @@ if __name__ == '__main__':
     while elapsedtime < 120:
         elapsedtime = time.time() - starttime
         setRGB(c,255-c,0)
-        time.sleep(0.01)
         if c == 255 or c==0:
             diff = -diff
-        c+=diff
-        if elapsedtime%20 < 10:
-            setText(get_ip())
-        else:
-            setText(get_mac())
+        c+=diff  
+        time.sleep(0.1)
     setRGB(0,0,0) #not sure how to turn off
     setText("")
