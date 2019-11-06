@@ -38,6 +38,7 @@ def turn_off_led_digitalport(port):
 def turn_off_buzzer_digitalport(port):
     # ensure port is set to output
     # digitalwrite 0
+    return
 
 def turn_off_buzzer_digitalport(port):
     # ensure port is set to output
