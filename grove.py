@@ -12,7 +12,7 @@ def read_light_sensor_analogueport(port):
     sensor_value = None
     try:
         sensor_value = grovepi.analogRead(light_sensor) # Get sensor value
-    except IOError:
+    except IOError: #this doesnt appear to work
         log.error("Error in reading the light sensor")
     return sensor_value
 
@@ -35,10 +35,7 @@ def turn_off_led_digitalport(port):
 #--------------------------------------------------------------------
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
-    pass
-    '''
     while True:
         light = read_light_sensor_analogueport(0)
         print(light)
-    '''
 
