@@ -17,7 +17,7 @@ def read_light_analogueport(port):
     return sensor_value
 
 def read_ultrasonic_digitalport(port):
-    # sensor_value = None
+    sensor_value = None
     # ensure port is set to input
     # use a try and except block same as above to log error
     # use grovepi.ultrasonicRead()
@@ -48,8 +48,8 @@ def turn_off_buzzer_digitalport(port):
 #--------------------------------------------------------------------
 # Main program goes here. This code is only called if the file is the execution point
 if __name__ == '__main__':
-    pass
-    '''
+    pass #remove this
+    ''' #uncomment by deleting quotations marks
     while True: #forever loop
         # read ultrasonic distance
         # if ultrasonic distance < 20
