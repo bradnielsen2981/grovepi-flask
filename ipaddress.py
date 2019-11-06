@@ -1,6 +1,7 @@
 # Python Program to Get IP Address   
 import socket
 import time
+import uuid
 from grove_rgb_lcd import *
 
 def get_ip():
@@ -15,9 +16,11 @@ def get_ip():
         s.close()
     return IP
 
+def get_macaddress():
+    return hex(uuid.getnode())
+
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
-    setText(get_ip())
     setRGB(0,128,64)
 
     elapsedtime = 0
@@ -25,8 +28,9 @@ if __name__ == '__main__':
     c = 1
     diff = 1
     # Slowly change the colors every 0.01 seconds.
-    while elapsedtime < 60:
+    while elapsedtime < 120:
         elapsedtime = time.time() - starttime
+        setText(get_ip() + " " + get_macaddress())
         setRGB(c,255-c,0)
         time.sleep(0.01)
         if c == 255 or c==0:
