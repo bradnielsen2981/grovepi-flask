@@ -3,6 +3,7 @@ import socket
 import time
 import uuid
 from grove_rgb_lcd import *
+import re, uuid 
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -22,7 +23,7 @@ def get_macaddress():
 #Only execute if this is the main file, good for testing code
 if __name__ == '__main__':
     setRGB(0,128,64)
-
+    setText(get_ip() + "  " + get_mac())
     elapsedtime = 0
     starttime = time.time()
     c = 1
@@ -32,9 +33,9 @@ if __name__ == '__main__':
         elapsedtime = time.time() - starttime
         setText(get_ip() + " " + get_macaddress())
         setRGB(c,255-c,0)
-        time.sleep(0.01)
         if c == 255 or c==0:
             diff = -diff
-        c+=diff
+        c+=diff  
+        time.sleep(0.1)
     setRGB(0,0,0) #not sure how to turn off
     setText("")
