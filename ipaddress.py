@@ -19,10 +19,9 @@ def get_ip():
 def get_mac():
     return(':'.join(re.findall('..', '%012x' % uuid.getnode())))
 
-#Only execute if this is the main file, good for testing code
-if __name__ == '__main__':
+def run_ipaddress_RGB_display():
     setRGB(0,128,64)
-    setText(get_ip() + "  " + get_mac())
+    setText(get_ip() + "  " + get_mac()) #sets the text of the LCD
     elapsedtime = 0
     starttime = time.time()
     c = 1
@@ -37,3 +36,8 @@ if __name__ == '__main__':
         time.sleep(0.1)
     setRGB(0,0,0) #not sure how to turn off
     setText("")
+    return
+
+#Only execute if this is the main file, good for testing code
+if __name__ == '__main__':
+    run_ipaddress_RGB_display()

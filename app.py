@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 import logging #allow loggings
 import grove #imports the grove functionality that you define
+import ipaddress #imports the display on I2C-2
 
 #uses JSONIFY to encode data structures in Strings. AJAX can then change it back..
 
@@ -25,6 +26,21 @@ def start():
 def stop():
     grove.turn_off_led_digitalport(5)
     return jsonify({ "message":"stopping" }) 
+
+#start RGB display
+@app.route('/displayipaddress', methods=['GET','POST'])
+def displayipaddress():
+    ipaddress.run_ipaddress_RGB_display()
+    return jsonify({ "message":"running ipaddress display" })
+
+ #start RGB display
+@app.route('/getlightlevel', methods=['GET','POST'])
+def getlightlevel():
+    light = grove.read_light_sensor_analogueport(1)
+    lightreading = "Light level: " + str(light)
+    log.error(lightreading)
+    return jsonify({ "message":lightreading })
+
 
 #---------------------------------------------------------------
 #Shutdown the web server
