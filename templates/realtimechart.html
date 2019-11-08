@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <!-- area for real time chart-->
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="static/realtimechart.js"></script>
+{% endblock %}

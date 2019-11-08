@@ -18,11 +18,11 @@ def get_ip():
     return IP
 
 def get_macaddress():
-    return hex(uuid.getnode())
+    return(':'.join(re.findall('..', '%012x' % uuid.getnode())))
 
 def run_ipaddress_RGB_display():
     setRGB(0,128,64)
-    setText(get_ip() + "  " + get_mac()) #sets the text of the LCD
+    setText(get_ip() + "  " + get_macaddress()) #sets the text of the LCD
     elapsedtime = 0
     starttime = time.time()
     c = 1
@@ -30,7 +30,6 @@ def run_ipaddress_RGB_display():
     # Slowly change the colors every 0.01 seconds.
     while elapsedtime < 120:
         elapsedtime = time.time() - starttime
-        setText(get_ip() + " " + get_macaddress())
         setRGB(c,255-c,0)
         if c == 255 or c==0:
             diff = -diff

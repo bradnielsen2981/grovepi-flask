@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import logging #allow loggings
 import grove #imports the grove functionality that you define
 import ipaddress #imports the display on I2C-2
+from datetime import datetime
 
 #uses JSONIFY to encode data structures in Strings. AJAX can then change it back..
 
@@ -41,7 +42,14 @@ def getlightlevel():
     log.error(lightreading)
     return jsonify({ "message":lightreading })
 
-
+@app.route('/realtimechart', methods=['GET','POST'])
+def realtimechart():
+    if request.method == 'POST': #handle a JSON POST
+        light = grove.read_light_sensor_analogueport(1)
+        time = datetime.now().time()
+        return jsonify({ "light":light, "time":time })
+    else:
+        return render_template("realtimechart.html")
 #---------------------------------------------------------------
 #Shutdown the web server
 @app.route('/shutdown', methods=['GET','POST'])
