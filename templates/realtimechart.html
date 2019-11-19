@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <!-- area for real time chart-->
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-</div>
+    <div class="container">
+        <!-- area for real time chart-->
+        <div id="line_chart" style="width:700px; height:300px;"></div>
+        <div id="gauge_chart" style="width: 400px; height: 120px;"></div>
+    </div>
 {% endblock %}
 {% block scripts %}
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-<script src="static/realtimechart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="static/realtimechart.js"></script>
 {% endblock %}
