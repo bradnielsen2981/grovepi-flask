@@ -16,7 +16,7 @@ def read_light_sensor_analogueport(port):
         log.error("Error in reading the light sensor")
     return sensor_value
 
-# This function will return the current light reading from the desired ANALOG port A0, A1 etc
+# This function will return the current light reading from the desired ANALOG port A0, A1 
 def read_ultra_digitalport(port):
     ultra = port
     grovepi.pinMode(ultra,"INPUT")
@@ -40,6 +40,17 @@ def turn_off_led_digitalport(port):
     grovepi.pinMode(led,"OUTPUT")
     grovepi.digitalWrite(led,0)
     return
+
+#read temp and humidity
+def read_temp_humidity_sensor_digitalport(port):
+    tempsensor = port
+    grovepi.pinMode(tempsensor,"INPUT")
+    temp_humidity_list = None
+    try:
+        temp_humidity_list = grovepi.dht(port,0) #0 - type blue sensor
+    except IOError: #this doesnt appear to work
+        log.error("Error in reading the temp and humidity sensor")
+    return temp_humidity_list
 
 #--------------------------------------------------------------------
 #Only execute if this is the main file, good for testing code

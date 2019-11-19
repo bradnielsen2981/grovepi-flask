@@ -2,11 +2,13 @@
 {% block content %}
     <div class="container">
         <!-- area for real time chart-->
-        <div id="gauge_chart" style="width: 400px; height: 120px;"></div>
+        <div id="light_gauge_chart" style="width: 400px; height: 120px;"></div>
+        <div id="temp_gauge_chart" style="width: 400px; height: 120px;"></div>
     </div>
 {% endblock %}
 {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="static/gauge.js"></script>
+    <!--<script src="static/lightgauge.js"></script>-->
+    <!-- <script src="static/temperaturegauge.js"></script> -->
 {% endblock %}

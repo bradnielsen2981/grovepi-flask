@@ -45,10 +45,10 @@ def getlight():
     return jsonify({ "Light":light })
 
 #return temp values
-@app.route('/gettemp', methods=['GET','POST'])
-def gettemp():
-    temp = grove.read_temp_sensor_analogueport(1) #get light sensor from a1
-    return jsonify({ "Temp":temp })
+@app.route('/gettemphumidity', methods=['GET','POST'])
+def gettemphumidity():
+    [temp,humidity] = grove.read_temp_humidity_sensor_digitalport(7) #get temperature and humidity
+    return jsonify({ "Temperature":temp, "Humidity":humidity })
 
 #get all live values in one list alongside time
 @app.route('/getlivevalues', methods=['GET','POST'])

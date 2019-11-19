@@ -3,7 +3,7 @@
 
 var recurringhandle2 = null;
 google.charts.load('current', {'packages':['gauge']});
-google.charts.setOnLoadCallback(function(){ recurringhandle2 = setInterval(get_gauge_data, 1000); } );
+google.charts.setOnLoadCallback(function(){ recurringhandle2 = setInterval(get_gauge_data, 5000); } );
 
 function draw_gauge(result) {
 
@@ -20,7 +20,7 @@ function draw_gauge(result) {
     ]);
     data.setValue(0, 1, result.Light);
 
-    var chart = new google.visualization.Gauge(document.getElementById('gauge_chart'));
+    var chart = new google.visualization.Gauge(document.getElementById('light_gauge_chart'));
     chart.draw(data, options);
 
 }
