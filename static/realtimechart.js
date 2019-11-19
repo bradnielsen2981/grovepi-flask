@@ -1,7 +1,9 @@
 // Visualization API with the 'corechart' package.
-var recurringhandle = null;  //can be used to delete recurring function
+var recurringhandle = null;  //can be used to delete recurring function if you want
+
+//Load the charts in
 google.charts.load('visualization', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(function(){ recurringhandle = setInterval(get_line_chart_data, 1000); }); //starts the line chart
+google.charts.setOnLoadCallback(function(){ recurringhandle = setInterval(get_line_chart_data, 1000); }); //starts the line chart updating each 1 sec
 var SensorList = [];
 
 //with received json data, draw the chart
@@ -18,8 +20,7 @@ function draw_line_chart(result) {
         SensorList.shift(); SensorList.shift(); //delete first two elements of array
         SensorList.unshift(line_chart_headings); //Add the headings back
     } 
-    // Create DataTable and add the array to it.
-    console.log(SensorList);
+
     var figures = google.visualization.arrayToDataTable(SensorList);
 
     // Define the chart type (LineChart) and the container (a DIV in our case).
@@ -29,41 +30,5 @@ function draw_line_chart(result) {
 
 //THis recurring function gets data using JSON
 function get_line_chart_data() {
-    JSONrequest('/realtimechart','POST', draw_line_chart); //Once data is received it is passed to the drawchart function
+    JSONrequest('/getlivevalues','POST', draw_line_chart); //Once data is received it is passed to the drawchart function
 }
-
-
-
-//GAUGE CODE-----------------------------------------------------------
-//Google Charts - Gauge
-/*
-var recurringhandle2 = null;
-google.charts.load('current', {'packages':['gauge']});
-google.charts.setOnLoadCallback(function(){ recurringhandle2 = setInterval(get_gauge_data, 1000); } );
-
-function draw_gauge(result) {
-
-    var options = {
-        width: 400, height: 120,
-        redFrom: 800, redTo: 1000,
-        yellowFrom:500, yellowTo: 800,
-        minorTicks: 5, max:1000
-    };
-
-    var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Light', 300]
-    ]);
-    data.setValue(0, 1, result.Light);
-
-    var chart = new google.visualization.Gauge(document.getElementById('gauge_chart'));
-    chart.draw(data, options);
-
-}
-
-//THis recurring function gets data using JSON
-function get_gauge_data() {
-    JSONrequest('/getlight','POST', draw_gauge); //Once data is received, send to draw
-}
-*/
-//----------------------------------------------------------

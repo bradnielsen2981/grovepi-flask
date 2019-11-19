@@ -2,7 +2,6 @@
 urlstring, methodstring="GET"or"POST", parameterobject={var1:value,var1:value}, crossdomain=true or false, responsehandler=functionname */
 function JSONrequest(urlstring, methodstring, responsehandler=defaulthandler, parametersobject=null, sendtype="json", crossdomainbool=false )
 {
-    console.log("Make a JSON Request");
     $(document).ready(function() { //make sure script is fully loaded, otherwise errors will occur
         $.ajax({
             type: methodstring,
@@ -11,7 +10,6 @@ function JSONrequest(urlstring, methodstring, responsehandler=defaulthandler, pa
             data: parametersobject, //{var1:1,var2:"hello"}
             dataType : sendtype,  //calls json.parse to convert results (JSON) to Javascript Object
             success: function(result) {
-                console.log("SUCCESS");
                 responsehandler(result); //send results to responsehandler function
             },
             error: function(error) {
@@ -25,5 +23,4 @@ function JSONrequest(urlstring, methodstring, responsehandler=defaulthandler, pa
 function defaulthandler(result)
 {
     document.getElementById('message').innerHTML = result.message;
-    console.log(result.message);
 }

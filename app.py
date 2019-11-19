@@ -5,7 +5,6 @@ import ipaddress #imports the display on I2C-2
 from datetime import datetime
 
 #uses JSONIFY to encode data structures in Strings. AJAX can then change it back..
-
 #Global Variables
 app = Flask(__name__)
 log = app.logger #sets up a log -- to log call log.info('message')
@@ -28,35 +27,40 @@ def stop():
     grove.turn_off_led_digitalport(5) #turn off led on d5
     return jsonify({ "message":"stopping" }) 
 
+#dashboard
+@app.route('/dashboard', methods=['GET','POST'])
+def dashboard():
+    return render_template("dashboard.html")
+
 #start RGB display
 @app.route('/displayipaddress', methods=['GET','POST'])
 def displayipaddress():
     ipaddress.run_ipaddress_RGB_display() #set ipaddress RGB
     return jsonify({ "message":"running ipaddress display" })
 
-#start RGB display
-@app.route('/getlightlevel', methods=['GET','POST'])
-def getlightlevel():
-    light = grove.read_light_sensor_analogueport(1) #get light sensor from a1
-    lightreading = "Light level: " + str(light)
-    log.error(lightreading)
-    return jsonify({ "message":lightreading })
-
-#start RGB display
+#return light values
 @app.route('/getlight', methods=['GET','POST'])
 def getlight():
     light = grove.read_light_sensor_analogueport(1) #get light sensor from a1
     return jsonify({ "Light":light })
 
-#display chart using chart.js
+#return temp values
+@app.route('/gettemp', methods=['GET','POST'])
+def gettemp():
+    temp = grove.read_temp_sensor_analogueport(1) #get light sensor from a1
+    return jsonify({ "Temp":temp })
+
+#get all live values in one list alongside time
+@app.route('/getlivevalues', methods=['GET','POST'])
+def livelinechart():
+    light = grove.read_light_sensor_analogueport(1)
+    time = datetime.now()
+    return jsonify({"Time":time.second,"Light":light,"Temperature":0})
+
+#get render the realtimechart
 @app.route('/realtimechart', methods=['GET','POST'])
 def realtimechart():
-    if request.method == "POST":
-        light = grove.read_light_sensor_analogueport(1)
-        time = datetime.now()
-        return jsonify({"Time":time.second,"Light":light,"Temperature":0})
-    else:
-        return render_template('realtimechart.html')
+    return render_template('realtimechart.html')
 
 #---------------------------------------------------------------
 #Shutdown the web server
