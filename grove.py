@@ -35,7 +35,7 @@ def turn_off_led_digitalport(port):
     # digitalwrite 0 is dark
     return
 
-def turn_off_buzzer_digitalport(port):
+def turn_on_buzzer_digitalport(port):
     # ensure port is set to output
     # digitalwrite 0
     return
@@ -46,7 +46,7 @@ def turn_off_buzzer_digitalport(port):
     return
 
 #--------------------------------------------------------------------
-# Main program goes here. This code is only called if the file is the execution point
+# This code is only called if the file is the execution point - a good way to test
 if __name__ == '__main__':
     pass #remove this
     ''' #uncomment by deleting quotations marks

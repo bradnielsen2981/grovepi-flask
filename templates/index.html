@@ -2,7 +2,7 @@
 {% block content %}
 <h2>Sample Web Interface using Bootstrap</h2><br/>
 <p>The buttons when clicked run a special script that can be used to send data to the server without a form (and the necessary page refresh). This helper script uses JSON (a method of sending complex data through text encoding).</p>
-<p>The helper function can be used as follows <b>JSONrequest</b>(/url, "POST", {var1:"value1",var2:"value2"...}, name_of_callback_function)</p><i>The callback function receives a result object that contains response data.</i>
+<p>The helper function can be used as follows <b>JSONrequest</b>(/url, "POST", name_of_callback_function, {var1:"value1",var2:"value2"...}, )</p><i>The callback function receives a result object that contains response data.</i>
 <div class="container">
     <div class="row">
         <h3 id="message"></h3>

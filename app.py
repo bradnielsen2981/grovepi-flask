@@ -32,6 +32,6 @@ def shutdown():
     func()
     return jsonify({ "message":"shutting down" }) 
 
-#Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
+#Threaded most is useful if multiple users are logging but causes issues
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=False)
