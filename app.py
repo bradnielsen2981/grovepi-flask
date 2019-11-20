@@ -34,4 +34,4 @@ def shutdown():
 
 #Threaded mode is important if using shared resources e.g. sensor, each user request launches a thread.. 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='0.0.0.0', debug=True, threaded=False)
